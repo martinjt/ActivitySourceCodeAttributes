@@ -20,13 +20,14 @@ public class ActivitySourceWithCodePath
         _source = new System.Diagnostics.ActivitySource(name);
     }}
 
-    public Activity? StartActivity(string name = """", [CallerFilePath] string path = null, [CallerLineNumber] int? lineNumber = null)
+    public Activity? StartActivity(string name = """", [CallerFilePath] string path = null, [CallerLineNumber] int? lineNumber = null, [CallerMemberName] string memberName = "")
     {{
         var span = _source.StartActivity(name);
         var relativePath = path.Replace(""{baseFilePath}"", """");
         span?.SetTag(""code.url"", GetPath(relativePath, lineNumber ?? 0));
-        span?.SetTag(""code.path"", path);
-        span?.SetTag(""code.linenumber"", lineNumber);
+        span?.SetTag(""code.filepath"", path);
+        span?.SetTag(""code.function"", memberName);
+        span?.SetTag(""code.lineno"", lineNumber);
         return span;
     }}
 
