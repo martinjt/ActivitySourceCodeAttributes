@@ -23,16 +23,16 @@ public class ActivitySourceWithCodePath
     public Activity? StartActivity(string name = """", [CallerFilePath] string path = null, [CallerLineNumber] int? lineNumber = null)
     {{
         var span = _source.StartActivity(name);
-        span?.SetTag(""code.url"", GetPath(path, lineNumber ?? 0));
+        var relativePath = path.Replace(""{baseFilePath}"", """");
+        span?.SetTag(""code.url"", GetPath(relativePath, lineNumber ?? 0));
         span?.SetTag(""code.path"", path);
         span?.SetTag(""code.linenumber"", lineNumber);
-        Console.WriteLine($""here: {{path}}"");
         return span;
     }}
 
     public string GetPath(string path, int lineNumber)
     {{
-        return $""https://github.com/{repoOrg}/{repoName}/blob/{commitHash}/{{path}}#L{{lineNumber}}"";
+        return $""https://github.com/{repoOrg}/{repoName}/blob/{commitHash}{{path}}#L{{lineNumber}}"";
     }}
 }}
 ";

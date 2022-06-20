@@ -11,12 +11,7 @@ builder.Services
         .AddAspNetCoreInstrumentation()
         .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Otel-code-path"))
         .AddSource("MySource")
-        .AddOtlpExporter(otlpOptions => {
-            otlpOptions.Endpoint = new Uri("https://api.honeycomb.io:443");
-            var key = builder.Configuration.GetValue<string>("Honeycomb:ApiKey");
-            Console.WriteLine(key);
-            otlpOptions.Headers = $"x-honeycomb-team={key}";
-        }));
+        .AddConsoleExporter());
 
 var app = builder.Build();
 
