@@ -5,17 +5,16 @@ namespace ActivitySourceGenerator;
 [Generator]
 public class Generator : ISourceGenerator
 {
-    public Generator()
-    {
-        // while (!System.Diagnostics.Debugger.IsAttached)
-        //     System.Threading.Thread.Sleep(500);
-    }
     public void Execute(GeneratorExecutionContext context)
     {
         var mainSyntaxTree = context.Compilation.SyntaxTrees
                             .First(x => x.HasCompilationUnitRoot);
 
-        var directory = new DirectoryInfo(Path.GetDirectoryName(mainSyntaxTree.FilePath));
+        var directoryName = Path.GetDirectoryName(mainSyntaxTree.FilePath);
+        if (string.IsNullOrEmpty(directoryName))
+            return;
+
+        var directory = new DirectoryInfo(directoryName);
         var iterations = 0;
         while (true)
         {
@@ -24,12 +23,17 @@ public class Generator : ISourceGenerator
 
             iterations++;
             
+            if (directory == null)
+                break;
+
             if (Directory.Exists(Path.Combine(directory.FullName, ".git")))
                 break;
             
             directory = directory.Parent;
         }
 
+        if (directory == null)
+            return;
 
         var (repoOrg, repoName) = GetRepoDetails(directory.FullName);
         var hash = GetCommitHash(directory.FullName);
@@ -47,7 +51,7 @@ public class Generator : ISourceGenerator
         return refsFile[0];
     }
 
-    private (string, string) GetRepoDetails(string gitPath)
+    private (string?, string?) GetRepoDetails(string gitPath)
     {
         var configLines = File.ReadAllLines(Path.Combine(gitPath, ".git", "config"));
 
@@ -62,14 +66,13 @@ public class Generator : ISourceGenerator
             }
         }
 
-        if (!sections.TryGetValue("[remote \"origin\"]", out var originSection) &&
-            (!originSection?.Properties.ContainsKey("url") ?? true))
+        if (!sections.TryGetValue("[remote \"origin\"]", out var originSection) ||
+            originSection == null ||
+            !originSection.Properties.ContainsKey("url"))
             return (null, null);
 
         if (originSection.Properties["url"].StartsWith("git@"))
         {
-            //  git@github.com:martinjt/activity-source-codegen.git
-
             var afterColon = originSection.Properties["url"].Split(":")[1];
             var repoOrg = afterColon.Split("/")[0];
             var repoName = afterColon.Split("/")[1].Replace(".git", "");
@@ -86,7 +89,7 @@ public class Generator : ISourceGenerator
 
     private class IniSection
     {
-        public string Name { get; private set; }
+        public string Name { get; private set; } = null!;
         public Dictionary<string, string> Properties { get; } = new Dictionary<string, string>();
 
         public void Read(string[] lines, int start)
