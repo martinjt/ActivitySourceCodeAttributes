@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Reflection;
+using Microsoft.CodeAnalysis;
 
 namespace ActivitySourceGenerator;
 
@@ -40,6 +41,12 @@ public class Generator : ISourceGenerator
         
         context.AddSource("Generator", Templates.GetActivitySourceClass(repoOrg, repoName, directory.FullName, hash));
         context.AddSource("GeneratorGlobals", Templates.GenerateGlobalUsing());
+ 
+        var thisAssembly = Assembly.GetExecutingAssembly();
+        using (var sr = new StreamReader(thisAssembly.GetManifestResourceStream("ActivitySourceGenerator.SpanExtensions.cs")!))
+        {
+            context.AddSource("Extensions", sr.ReadToEnd());
+        }
     }
 
     private string GetCommitHash(string solutionPath)
