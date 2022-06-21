@@ -1,4 +1,4 @@
-namespace otel_code_path.Models;
+namespace ActivitySourceCodeAttributes.Sample.Models;
 
 public class ErrorViewModel
 {

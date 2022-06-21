@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Shouldly;
 
-namespace ActivitySourceGenerator.Tests;
+namespace ActivitySourceCodeAttributes.Tests;
 
 public class CodePathTests
 {

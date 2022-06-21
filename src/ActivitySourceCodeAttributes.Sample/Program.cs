@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services
         .AddOpenTelemetryTracing((otelBuilder) => otelBuilder
         .AddAspNetCoreInstrumentation()
-        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Otel-code-path"))
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("ActivitySourceCodeAttributes.Sample"))
         .AddSource("MySource")
         .AddConsoleExporter());
 

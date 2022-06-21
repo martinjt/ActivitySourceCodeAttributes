@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace ActivityGenerator;
+namespace ActivitySourceCodeAttributes;
 
 public static class ActivityExtensions
 {

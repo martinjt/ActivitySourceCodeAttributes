@@ -1,4 +1,4 @@
-namespace ActivitySourceGenerator;
+namespace ActivitySourceCodeAttributes;
 
 public static class Templates
 {
@@ -10,7 +10,7 @@ public static class Templates
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace ActivityGenerator;
+namespace ActivitySourceCodeAttributes;
 
 public class ActivitySourceWithCodePath
 {{
@@ -20,7 +20,7 @@ public class ActivitySourceWithCodePath
         _source = new System.Diagnostics.ActivitySource(name);
     }}
 
-    public Activity? StartActivity(string name = """", [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = """")
+    public Activity? StartActivity(string name = """", [CallerFilePath] string? filePath = null, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = """")
     {{
         var span = _source.StartActivity(name);
 
@@ -41,6 +41,6 @@ public class ActivitySourceWithCodePath
     public static string GenerateGlobalUsing()
     {
         return @"
-        global using ActivitySource = ActivityGenerator.ActivitySourceWithCodePath;";
+        global using ActivitySource = ActivitySourceCodeAttributes.ActivitySourceWithCodePath;";
     }
 }

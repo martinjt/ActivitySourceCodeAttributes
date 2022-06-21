@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="SpanExtensions.cs" />
+    <EmbeddedResource Include="ActivityExtensions.cs" />
   </ItemGroup>
 </Project>

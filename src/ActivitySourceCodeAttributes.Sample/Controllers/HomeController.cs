@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using otel_code_path.Models;
+using ActivitySourceCodeAttributes.Sample.Models;
 
-namespace otel_code_path.Controllers;
+namespace ActivitySourceCodeAttributes.Sample.Controllers;
 
 public class HomeController : Controller
 {

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.CodeAnalysis;
 
-namespace ActivitySourceGenerator;
+namespace ActivitySourceCodeAttributes;
 
 [Generator]
 public class Generator : ISourceGenerator
@@ -43,7 +43,7 @@ public class Generator : ISourceGenerator
         context.AddSource("GeneratorGlobals", Templates.GenerateGlobalUsing());
  
         var thisAssembly = Assembly.GetExecutingAssembly();
-        using (var sr = new StreamReader(thisAssembly.GetManifestResourceStream("ActivitySourceGenerator.SpanExtensions.cs")!))
+        using (var sr = new StreamReader(thisAssembly.GetManifestResourceStream("ActivitySourceCodeAttributes.ActivityExtensions.cs")!))
         {
             context.AddSource("Extensions", sr.ReadToEnd());
         }

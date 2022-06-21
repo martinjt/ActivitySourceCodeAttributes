@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{428CD6C9-BA82-468D-816A-31EDA1D90549}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "otel-code-path", "src\sample\otel-code-path.csproj", "{44D18ECB-12EC-4AD0-8EF1-768BB7DA5610}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivitySourceCodeAttributes.Sample", "src\ActivitySourceCodeAttributes.Sample\ActivitySourceCodeAttributes.Sample.csproj", "{44D18ECB-12EC-4AD0-8EF1-768BB7DA5610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivitySourceGenerator", "src\ActivitySourceGenerator\ActivitySourceGenerator.csproj", "{CADCAAE0-7F2D-4501-AD48-1932FDCA3B3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivitySourceCodeAttributes", "src\ActivitySourceCodeAttributes\ActivitySourceCodeAttributes.csproj", "{CADCAAE0-7F2D-4501-AD48-1932FDCA3B3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8F52D2F6-8615-4E20-903C-57D395D0A178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codegen-test", "tests\ActivitySourceGenerator.Tests\ActivitySourceGenerator.Tests.csproj", "{1A305CC5-C69E-4A88-90D7-A630548C67FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codegen-test", "tests\ActivitySourceCodeAttributes.Tests\ActivitySourceCodeAttributes.Tests.csproj", "{1A305CC5-C69E-4A88-90D7-A630548C67FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
