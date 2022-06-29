@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Shouldly;
 
 namespace ActivitySourceCodeAttributes.Tests;
@@ -16,12 +17,7 @@ public class CodePathTests : ActivitySourceBaseTest
 
         var testActivity = triggeredActivities.FirstOrDefault();
         testActivity.ShouldNotBeNull();
-
-
-        testActivity.Tags.ShouldContain(t => t.Key == "code.filepath");
-        var filePath = GetFilePath();
-
-        testActivity.Tags.ShouldContain(t => t.Key == "code.filepath" && t.Value == filePath);
+        testActivity.ShouldContainTagWithValue("code.filepath", GetFilePath());
     }
 
     [Fact]
@@ -36,9 +32,8 @@ public class CodePathTests : ActivitySourceBaseTest
 
         var testActivity = triggeredActivities.FirstOrDefault();
         testActivity.ShouldNotBeNull();
+        testActivity.ShouldContainTagWithValue("code.lineno", (linenumber - 3).ToString());
 
-        testActivity.Tags.ShouldContain(t => t.Key == "code.lineno");
-        testActivity.Tags.ShouldContain(t => t.Key == "code.lineno" && t.Value == (linenumber - 3).ToString());
     }
 
     [Fact]
@@ -52,9 +47,15 @@ public class CodePathTests : ActivitySourceBaseTest
 
         var testActivity = triggeredActivities.FirstOrDefault();
         testActivity.ShouldNotBeNull();
-
-        testActivity.Tags.ShouldContain(t => t.Key == "code.function");
-        testActivity.Tags.ShouldContain(t => t.Key == "code.function" && t.Value == nameof(StartActivity_ProducesMethodAttributeWithRightValue));
+        testActivity.ShouldContainTagWithValue("code.function", nameof(StartActivity_ProducesMethodAttributeWithRightValue));
     }
+}
 
+public static class ActivityTestExtensions
+{
+    public static void ShouldContainTagWithValue(this Activity activity, string name, string value)
+    {
+        activity.Tags.ShouldContain(t => t.Key == name);
+        activity.Tags.ShouldContain(t => t.Key == name && t.Value == value);
+    }
 }

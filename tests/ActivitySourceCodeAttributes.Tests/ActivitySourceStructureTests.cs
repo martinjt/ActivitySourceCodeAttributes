@@ -88,7 +88,7 @@ public class NewActivitySource_HasTheSameStructureAsBCL
                 }
             }
 
-            Assert.True(newMethodFound, $"No method found for {originalMethod.Name}({string.Join(',', originalMethod.GetParameters().Select(p => p.ParameterType.ToString()))})");
+            Assert.True(newMethodFound, $"No method found for {originalMethod.Name}({string.Join(',', originalMethod.GetParameters().Select(p => p.ParameterType.Name.ToString()))})");
                 
         }
 
