@@ -41,12 +41,6 @@ public class Generator : ISourceGenerator
         
         context.AddSource("Generator", Templates.GetActivitySourceClass(repoOrg, repoName, directory.FullName, hash));
         context.AddSource("GeneratorGlobals", Templates.GenerateGlobalUsing());
- 
-        var thisAssembly = Assembly.GetExecutingAssembly();
-        using (var sr = new StreamReader(thisAssembly.GetManifestResourceStream("ActivitySourceCodeAttributes.ActivityExtensions.cs")!))
-        {
-            context.AddSource("Extensions", sr.ReadToEnd());
-        }
     }
 
     private string GetCommitHash(string solutionPath)

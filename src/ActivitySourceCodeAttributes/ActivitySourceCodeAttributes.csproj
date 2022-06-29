@@ -6,6 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>beta</VersionSuffix>
+    <PackageId>ActivitySourceCodeAttributes</PackageId>
+    <Authors>MartinJT</Authors>
+    <Description>Source Generator that will transform all your ActivitySource instances so that Activity instances that are created will have "code.*" attributes as Tags automatically</Description>
+    <PackageProjectUrl>https://github.com/martinjt/ActivitySourceCodeAttributes</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>opentelemetry observability tracing activity diagnostics</PackageTags>
+    <RepositoryUrl>https://github.com/martinjt/ActivitySourceCodeAttributes</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ActivityExtensions.cs" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
+
 </Project>
