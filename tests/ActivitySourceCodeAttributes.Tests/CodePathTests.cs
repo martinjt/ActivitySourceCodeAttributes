@@ -5,7 +5,6 @@ namespace ActivitySourceCodeAttributes.Tests;
 
 public class CodePathTests : ActivitySourceBaseTest
 {
-
     [Fact]
     public void StartActivity_ProducesCodeAttributeWithRightValue()
     {
@@ -48,14 +47,5 @@ public class CodePathTests : ActivitySourceBaseTest
         var testActivity = triggeredActivities.FirstOrDefault();
         testActivity.ShouldNotBeNull();
         testActivity.ShouldContainTagWithValue("code.function", nameof(StartActivity_ProducesMethodAttributeWithRightValue));
-    }
-}
-
-public static class ActivityTestExtensions
-{
-    public static void ShouldContainTagWithValue(this Activity activity, string name, string value)
-    {
-        activity.Tags.ShouldContain(t => t.Key == name);
-        activity.Tags.ShouldContain(t => t.Key == name && t.Value == value);
     }
 }
