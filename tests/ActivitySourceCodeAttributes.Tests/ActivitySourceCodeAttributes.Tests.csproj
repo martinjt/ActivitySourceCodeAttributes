@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ActivitySourceCodeAttributes\ActivitySourceCodeAttributes.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\src\ActivitySourceCodeAttributes\ActivitySourceCodeAttributes.csproj" ReferenceOutputAssembly="true" OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>
