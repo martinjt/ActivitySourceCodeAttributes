@@ -74,9 +74,9 @@ public class Generator : ISourceGenerator
 
         if (originSection.Properties["url"].StartsWith("git@"))
         {
-            var afterColon = originSection.Properties["url"].Split(":")[1];
-            var repoOrg = afterColon.Split("/")[0];
-            var repoName = afterColon.Split("/")[1].Replace(".git", "");
+            var afterColon = originSection.Properties["url"].Split(':')[1];
+            var repoOrg = afterColon.Split('/')[0];
+            var repoName = afterColon.Split('/')[1].Replace(".git", "");
 
             return (repoOrg, repoName);
         }
@@ -102,7 +102,7 @@ public class Generator : ISourceGenerator
                 if (lines[i].StartsWith("["))
                     return;
 
-                var value = lines[i].Split("=");
+                var value = lines[i].Split('=');
                 Properties.Add(value[0].Trim(), value[1].Trim());
             }
         }

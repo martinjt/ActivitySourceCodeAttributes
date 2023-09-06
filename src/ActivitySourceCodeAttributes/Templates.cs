@@ -7,6 +7,9 @@ public static class Templates
         string baseFilePath, string commitHash)
     {
         return $@"
+#pragma warning disable CS8632
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -33,7 +36,7 @@ public class ActivitySourceWithCodePath
 
     public Activity? StartActivity([CallerMemberName] string name = """", ActivityKind kind = ActivityKind.Internal, [CallerFilePath] string? filePath = null, [CallerLineNumber] int lineNumber = 0, [CallerMemberName] string memberName = """")
     {{
-        var span = _source.StartActivity(name);
+        var span = _source.StartActivity(name, kind);
 
         span?.AddCodeAttributes(
            ""{baseFilePath}"", 
